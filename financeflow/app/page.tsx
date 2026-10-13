@@ -1,27 +1,9 @@
-"Use client";
-
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { TransactionTable } from "@/app/components/transaction-table";
+import { IncomeExpenseChart } from "@/app/components/income-expense-chart";
 import { getDashboardData } from "@/app/lib/data";
 import { formatRupiah } from "@/app/lib/format";
-
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from "@/components/ui/chart";
-
-const chartConfig = {
-  income: {
-    label: "Pemasukan",
-  },
-  expense: {
-    label: "Pengeluaran",
-  },
-} satisfies ChartConfig;
 
 function MetricCard({
   label,
@@ -70,8 +52,6 @@ function MetricCard({
       </div>
       <p className="mt-3 text-xs text-slate-500">{caption}</p>
     </div>
-
-    
   );
 }
 
@@ -191,6 +171,15 @@ export default async function DashboardPage() {
           transactions={data.recent}
           emptyMessage="Belum ada transaksi. Tambahkan transaksi pertama Anda."
         />
+      </section>
+
+      <section className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+        <div className="mb-4">
+          <h2 className="text-base font-semibold text-slate-900">
+            Grafik Pemasukan & Pengeluaran
+          </h2>
+        </div>
+        <IncomeExpenseChart />
       </section>
     </div>
   );
